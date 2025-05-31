@@ -1,7 +1,55 @@
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 public class SegmentFormatter {
+
+    /**
+     * 区切り文字フォーマット処理を生成する
+     * @param argDelimiter 区切り文字
+     * @param argEveryCharsNum N文字
+     * @param isFromRight 右から区切り文字追加
+     * @return 区切り文字フォーマット処理
+     */
+    public static Function<String, String> createFormatter(
+            String argDelimiter,
+            int argEveryCharsNum,
+            boolean isFromRight) {
+
+        // 区切り文字追加処理を返却する
+        return (String s) -> {
+            //　フォーマットする文字列
+            String target;
+            // 右から区切り文字を追加する場合
+            if (isFromRight) {
+                // フォーマット対象文字列を反転する
+                target = SegmentFormatter.reverse(s);
+            }
+            // 左から区切り文字を追加する場合
+            else {
+                // フォーマット対象文字列を設定
+                target = s;
+            }
+            // N文字ずつの文字列リストに変換する
+            List<String> strNCharsList = SegmentFormatter.splitByN(target,argEveryCharsNum);
+            // 区切り文字を追加する
+            String addedDelimiterStr = SegmentFormatter.addDelimiter(strNCharsList, argDelimiter);
+            // フォーマット後文字列
+            String formattedStr;
+            // 右から区切り文字を追加する場合
+            if (isFromRight) {
+                // フォーマット後文字列を再度反転させて元の並びに戻す
+                formattedStr = SegmentFormatter.reverse(addedDelimiterStr);
+            }
+            // 左から区切り文字を追加する場合
+            else {
+                // フォーマット後文字列を設定
+                formattedStr = addedDelimiterStr;
+            }
+            // フォーマット後文字列を返却
+            return formattedStr;
+        };
+    }
 
     /**
      * 文字列リストに区切り文字をして文字列生成
@@ -9,7 +57,7 @@ public class SegmentFormatter {
      * @param argDelimiter 区切り文字
      * @return 区切り文字を追加した文字列
      */
-    public static String addDelimiter(List<String> argStrList, String argDelimiter) {
+    private static String addDelimiter(List<String> argStrList, String argDelimiter) {
         // 区切り文字を追加する
         return argStrList
                 .stream()
@@ -31,7 +79,7 @@ public class SegmentFormatter {
      * @param argStr 文字列
      * @return 反転した文字列
      */
-    public static String reverse(String argStr) {
+    private static String reverse(String argStr) {
         return new StringBuilder(argStr)
                 .reverse()          // 反転
                 .toString();        // 文字列に変換
@@ -44,7 +92,7 @@ public class SegmentFormatter {
      * @param argN N文字区切り
      * @return N文字ずつのList
      */
-    public static List<String> splitByN(String argStr, int argN) {
+    private static List<String> splitByN(String argStr, int argN) {
         int len = argStr.length();
         return IntStream.range(0, (len + (argN - 1)) / argN)  // n文字区切りなので、切り上げて個数計算
                 .mapToObj(i -> {
