@@ -47,7 +47,7 @@ public class SegmentFormat {
                 target = s;
             }
             // N文字ずつの文字列リストに変換する
-            List<String> strNCharsList = SegmentFormat.splitByN(target,argEveryCharsNum);
+            List<String> strNCharsList = SegmentFormat.splitIntoChunksOfN(target,argEveryCharsNum);
             // 区切り文字を追加する
             String addedDelimiterStr = SegmentFormat.addDelimiter(strNCharsList, argDelimiter);
             // フォーマット後文字列
@@ -96,7 +96,7 @@ public class SegmentFormat {
      * @param argN N文字区切り
      * @return N文字ずつのList
      */
-    private static List<String> splitByN(String argStr, int argN) {
+    private static List<String> splitIntoChunksOfN(String argStr, int argN) {
         int len = argStr.length();
         return IntStream.range(0, (len + (argN - 1)) / argN)  // n文字区切りなので、切り上げて個数計算
                 .mapToObj(i -> {
