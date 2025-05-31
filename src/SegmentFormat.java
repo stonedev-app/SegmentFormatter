@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-public class SegmentFormatter {
+public class SegmentFormat {
 
     /**
      * 区切り文字フォーマット処理を生成する
@@ -23,7 +23,7 @@ public class SegmentFormatter {
             // 右から区切り文字を追加する場合
             if (isFromRight) {
                 // フォーマット対象文字列を反転する
-                target = SegmentFormatter.reverse(s);
+                target = SegmentFormat.reverse(s);
             }
             // 左から区切り文字を追加する場合
             else {
@@ -31,15 +31,15 @@ public class SegmentFormatter {
                 target = s;
             }
             // N文字ずつの文字列リストに変換する
-            List<String> strNCharsList = SegmentFormatter.splitByN(target,argEveryCharsNum);
+            List<String> strNCharsList = SegmentFormat.splitByN(target,argEveryCharsNum);
             // 区切り文字を追加する
-            String addedDelimiterStr = SegmentFormatter.addDelimiter(strNCharsList, argDelimiter);
+            String addedDelimiterStr = SegmentFormat.addDelimiter(strNCharsList, argDelimiter);
             // フォーマット後文字列
             String formattedStr;
             // 右から区切り文字を追加する場合
             if (isFromRight) {
                 // フォーマット後文字列を再度反転させて元の並びに戻す
-                formattedStr = SegmentFormatter.reverse(addedDelimiterStr);
+                formattedStr = SegmentFormat.reverse(addedDelimiterStr);
             }
             // 左から区切り文字を追加する場合
             else {

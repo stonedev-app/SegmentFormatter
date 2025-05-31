@@ -6,7 +6,7 @@ public class Main {
         System.out.println(str);
 
         // 区切り文字フォーマット処理を生成
-        var formatter = SegmentFormatter.createFormatter(
+        var formatter = SegmentFormat.createFormatter(
                 "-",
                 2,
                 true);
