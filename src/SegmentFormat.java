@@ -7,7 +7,7 @@ public class SegmentFormat {
     /**
      * 区切り文字フォーマット処理を生成する
      * @param argDelimiter 区切り文字
-     * @param argEveryCharsNum N文字
+     * @param argEveryCharsNum N文字毎
      * @param argIsFromRight 右から区切り文字追加
      * @return 区切り文字フォーマット処理
      */
@@ -16,8 +16,24 @@ public class SegmentFormat {
             int argEveryCharsNum,
             boolean argIsFromRight) {
 
+        // 設定値のチェックを行う
+        // 区切り文字のチェック
+        if (argDelimiter == null || argDelimiter.isEmpty()) {
+            throw new SegmentFormatException("区切り文字が設定されていません");
+        }
+        // N文字毎の文字数チェック
+        if (argEveryCharsNum < 1) {
+            throw new SegmentFormatException("N文字毎には1以上を設定してください");
+        }
+
         // 区切り文字追加処理を返却する
         return (String s) -> {
+
+            // フォーマットする文字列がnull又は空文字の場合
+            if (s == null || s.isEmpty()) {
+                return s;
+            }
+
             //　フォーマットする文字列
             String target;
             // 右から区切り文字を追加する場合
