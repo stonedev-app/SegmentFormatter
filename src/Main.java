@@ -2,7 +2,7 @@ public class Main {
     public static void main(String[] args) {
 
         // フォーマット対象文字列
-        String str = "1234567";
+        var str = "1234567";
         // フォーマット前文字列を出力
         System.out.printf("フォーマット前文字列:%s%n", str);
 
