@@ -8,20 +8,20 @@ public class SegmentFormat {
      * 区切り文字フォーマット処理を生成する
      * @param argDelimiter 区切り文字
      * @param argEveryCharsNum N文字
-     * @param isFromRight 右から区切り文字追加
+     * @param argIsFromRight 右から区切り文字追加
      * @return 区切り文字フォーマット処理
      */
     public static Function<String, String> createFormatter(
             String argDelimiter,
             int argEveryCharsNum,
-            boolean isFromRight) {
+            boolean argIsFromRight) {
 
         // 区切り文字追加処理を返却する
         return (String s) -> {
             //　フォーマットする文字列
             String target;
             // 右から区切り文字を追加する場合
-            if (isFromRight) {
+            if (argIsFromRight) {
                 // フォーマット対象文字列を反転する
                 target = SegmentFormat.reverse(s);
             }
@@ -37,7 +37,7 @@ public class SegmentFormat {
             // フォーマット後文字列
             String formattedStr;
             // 右から区切り文字を追加する場合
-            if (isFromRight) {
+            if (argIsFromRight) {
                 // フォーマット後文字列を再度反転させて元の並びに戻す
                 formattedStr = SegmentFormat.reverse(addedDelimiterStr);
             }
