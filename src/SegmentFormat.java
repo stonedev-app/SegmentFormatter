@@ -75,19 +75,7 @@ public class SegmentFormat {
      */
     private static String addDelimiter(List<String> argStrList, String argDelimiter) {
         // 区切り文字を追加する
-        return argStrList
-                .stream()
-                .reduce("",
-                        (sum, elm) -> {
-                            // 空文字の場合は先頭なので区切り文字追加なし
-                            if (sum.isEmpty()) {
-                                return sum + elm;
-                            }
-                            // 先頭以外は区切り文字追加
-                            else {
-                                return sum + argDelimiter + elm;
-                            }
-                        });
+        return String.join(argDelimiter, argStrList);
     }
 
     /**
